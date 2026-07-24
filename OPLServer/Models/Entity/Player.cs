@@ -2,7 +2,7 @@
 {
     public class Player
     {
-        public int Id { get; set; }
+        public int PlayerID { get; set; }
         public required string Name { get; set; }
         public int CategoryID { get; set; }
         public int SkillID { get; set; }

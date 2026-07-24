@@ -1,12 +1,19 @@
 using Microsoft.EntityFrameworkCore;
-using OPLServer.Database;
+using Microsoft.Extensions.DependencyInjection;
 using OPLServer.Controllers;
+using OPLServer.Database;
+using OPLServer.IoC;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+//IoC.Configure(builder.Services);
 
-builder.Services.AddControllers();
+// Add services to the container.
+builder.Services
+    .AddControllers()
+    .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

@@ -48,7 +48,7 @@ namespace OPLServer.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAuctionPick(int id, AuctionPick auctionPick)
         {
-            if (id != auctionPick.Id)
+            if (id != auctionPick.PickID)
             {
                 return BadRequest();
             }
@@ -82,28 +82,28 @@ namespace OPLServer.Controllers
             _context.AuctionPicks.Add(auctionPick);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAuctionPick", new { id = auctionPick.Id }, auctionPick);
+            return CreatedAtAction("GetAuctionPick", new { id = auctionPick.PickID }, auctionPick);
         }
 
         // DELETE: api/AuctionPicks/5
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteAuctionPick(int id)
-        //{
-        //    var auctionPick = await _context.AuctionPicks.FindAsync(id);
-        //    if (auctionPick == null)
-        //    {
-        //        return NotFound();
-        //    }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAuctionPick(int id)
+        {
+            var auctionPick = await _context.AuctionPicks.FindAsync(id);
+            if (auctionPick == null)
+            {
+                return NotFound();
+            }
 
-        //    _context.AuctionPicks.Remove(auctionPick);
-        //    await _context.SaveChangesAsync();
+            _context.AuctionPicks.Remove(auctionPick);
+            await _context.SaveChangesAsync();
 
-        //    return NoContent();
-        //}
+            return NoContent();
+        }
 
         private bool AuctionPickExists(int id)
         {
-            return _context.AuctionPicks.Any(e => e.Id == id && e.IsActive);
+            return _context.AuctionPicks.Any(e => e.PickID == id && e.IsActive);
         }
     }
 }

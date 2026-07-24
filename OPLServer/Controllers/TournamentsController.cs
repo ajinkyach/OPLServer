@@ -102,7 +102,7 @@ namespace OPLServer.Controllers
 
         private bool TournamentExists(int id)
         {
-            return _context.TournamentDetails.Any(e => e.Id == id);
+            return _context.TournamentDetails.Any(e => e.TournamentID == id);
         }
     }
 }

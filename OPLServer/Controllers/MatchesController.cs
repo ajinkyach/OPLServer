@@ -12,47 +12,47 @@ namespace OPLServer.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PlayersController : ControllerBase
+    public class MatchesController : ControllerBase
     {
         private readonly OPLDBContext _context;
 
-        public PlayersController(OPLDBContext context)
+        public MatchesController(OPLDBContext context)
         {
             _context = context;
         }
 
-        // GET: api/Players
+        // GET: api/Matches
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Player>>> GetPlayers()
+        public async Task<ActionResult<IEnumerable<Matches>>> GetMatches()
         {
-            return await _context.Players.ToListAsync();
+            return await _context.Matches.ToListAsync();
         }
 
-        // GET: api/Players/5
+        // GET: api/Matches/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Player>> GetPlayer(int id)
+        public async Task<ActionResult<Matches>> GetMatches(int id)
         {
-            var player = await _context.Players.FindAsync(id);
+            var matches = await _context.Matches.FindAsync(id);
 
-            if (player == null)
+            if (matches == null)
             {
                 return NotFound();
             }
 
-            return player;
+            return matches;
         }
 
-        // PUT: api/Players/5
+        // PUT: api/Matches/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPlayer(int id, Player player)
+        public async Task<IActionResult> PutMatches(int id, Matches matches)
         {
-            if (id != player.PlayerID)
+            if (id != matches.MatchID)
             {
                 return BadRequest();
             }
 
-            _context.Entry(player).State = EntityState.Modified;
+            _context.Entry(matches).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace OPLServer.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PlayerExists(id))
+                if (!MatchesExists(id))
                 {
                     return NotFound();
                 }
@@ -73,36 +73,36 @@ namespace OPLServer.Controllers
             return NoContent();
         }
 
-        // POST: api/Players
+        // POST: api/Matches
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Player>> PostPlayer(Player player)
+        public async Task<ActionResult<Matches>> PostMatches(Matches matches)
         {
-            _context.Players.Add(player);
+            _context.Matches.Add(matches);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPlayer", new { id = player.PlayerID }, player);
+            return CreatedAtAction("GetMatches", new { id = matches.MatchID }, matches);
         }
 
-        // DELETE: api/Players/5
+        // DELETE: api/Matches/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePlayer(int id)
+        public async Task<IActionResult> DeleteMatches(int id)
         {
-            var player = await _context.Players.FindAsync(id);
-            if (player == null)
+            var matches = await _context.Matches.FindAsync(id);
+            if (matches == null)
             {
                 return NotFound();
             }
 
-            _context.Players.Remove(player);
+            _context.Matches.Remove(matches);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool PlayerExists(int id)
+        private bool MatchesExists(int id)
         {
-            return _context.Players.Any(e => e.PlayerID == id);
+            return _context.Matches.Any(e => e.MatchID == id);
         }
     }
 }

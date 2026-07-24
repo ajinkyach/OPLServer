@@ -64,7 +64,7 @@ namespace OPLServer.Controllers
 
                 var teamSquad = new TeamSquadDTO
                 {
-                    Id = team.Id,
+                    TeamID = team.TeamID,
                     Name = team.Name,
                     Owner = team.Owner,
                     FullName = team.FullName,
@@ -144,7 +144,7 @@ namespace OPLServer.Controllers
 
         private bool TeamExists(int id)
         {
-            return _context.Teams.Any(e => e.Id == id & e.IsActive);
+            return _context.Teams.Any(e => e.TeamID == id & e.IsActive);
         }
     }
 }

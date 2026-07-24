@@ -102,7 +102,7 @@ namespace OPLServer.Controllers
 
         private bool CategoryExists(int id)
         {
-            return _context.Categories.Any(e => e.Id == id);
+            return _context.Categories.Any(e => e.CategoryID == id);
         }
     }
 }

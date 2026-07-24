@@ -22,14 +22,14 @@ namespace OPLServer.Database
                     eb =>
                     {
                         eb.HasNoKey();
-                        eb.ToView("vSquads");
+                        eb.ToView("vw_Squads");
                     });
 
             modelBuilder
                 .Entity<TournamentDetailsDTO>(
                     eb =>
                     {
-                        eb.ToView("vTournamentDetails");
+                        eb.ToView("vw_TournamentDetails");
                     });
         }
 
@@ -40,6 +40,7 @@ namespace OPLServer.Database
         public DbSet<Tournament> Tournaments { get; set; }
         public DbSet<SquadDTO> Squads { get; set; }
         public DbSet<TournamentDetailsDTO> TournamentDetails { get; set; }
+        public DbSet<OPLServer.Models.Entity.Matches> Matches { get; set; } = default!;
 
 
     }

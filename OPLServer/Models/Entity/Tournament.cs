@@ -2,7 +2,7 @@
 {
     public class Tournament
     {
-        public int Id { get; set; }
+        public int TournamentID { get; set; }
         public required string Name { get; set; }
         public int Year { get; set; }
         public int TeamsCount { get; set; }
@@ -10,6 +10,9 @@
         public int Rounds { get; set; }
         public int WinningTeamID { get; set; }
         public int RunnersUpID { get; set; }
+        public int? OrangeCap { get; set; }
+        public int? PurpleCap { get; set; }
+        public int? PlayerOfTheSeriesID { get; set; }
         public bool IsActive { get; set; }
 
     }
